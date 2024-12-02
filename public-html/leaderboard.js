@@ -1,20 +1,12 @@
 let UPDATE_INTERVAL = 1 * 60 * 1000;
 let FETCH_INTERVAL = 15 * 60 * 1000;
 
-async function fetch_async(url, token) {
-    let response = await fetch(url, { method: "GET", headers: { Cookie: "session=" + token } });
-    if (!response.ok) {
-        const message = `An error has occured: ${response.status}`;
-        throw new Error(message);
-    }
-
-    let data = await response.json();
-    return data;
-}
-
-function fetch_remote(year, board, token) {
-    let url = "https://adventofcode.com/" + year + "/leaderboard/private/view/" + board + ".json";
-    return fetch_async(url, token);
+async function requestJsonLeaderboard(year, board, token) {
+    let url = "leaderboard.json";
+    const response = await fetch(url);
+    const json = await response.json();
+    console.log(json);
+    return json;
 }
 
 function should_update() {
@@ -43,7 +35,13 @@ function get_last_updated_string() {
     return new Date(last_updated).toLocaleString("sv");
 }
 
-function fetch_data(force) {
+function store_data(data) {
+    console.log("writing cache");
+    window.localStorage.setItem("leaderboard_data", JSON.stringify(data));
+    window.localStorage.setItem("last_updated", new Date().toISOString());
+}
+
+async function fetch_data(force) {
     let cached_data = window.localStorage.getItem("leaderboard_data");
 
     if (cached_data == null) {
@@ -58,19 +56,17 @@ function fetch_data(force) {
 
     if (cached_data == null || should_update() || force) {
         console.log("fetching new data");
-        data = fetch_remote(
+        let data = await requestJsonLeaderboard(
             window.localStorage.getItem("control_year"),
             window.localStorage.getItem("control_board"),
             window.localStorage.getItem("control_token")
         );
-        window.localStorage.setItem("leaderboard_data", JSON.stringify(data));
-        window.localStorage.setItem("last_updated", new Date().toISOString());
+        store_data(data);
+        return data;
     } else {
         console.log("using cached data");
-        data = JSON.parse(cached_data);
+        return JSON.parse(cached_data);
     }
-
-    return data;
 }
 
 function parse_days(day_data) {
@@ -130,12 +126,16 @@ function draw_days(arr, elem) {
     }
 }
 
-function populate_leaderboard(force) {
+async function populate_leaderboard(force) {
     if (force != true) {
         force = false;
     }
 
-    let members = parse_and_sort(fetch_data(force));
+    let data = await fetch_data(force);
+    console.log("here");
+    console.log(data);
+
+    let members = parse_and_sort(data);
 
     let leaderboard = document.getElementById("leaderboard");
     leaderboard.replaceChildren();
