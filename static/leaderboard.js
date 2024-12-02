@@ -2,7 +2,7 @@ let UPDATE_INTERVAL = 1 * 60 * 1000;
 let FETCH_INTERVAL = 15 * 60 * 1000;
 
 async function requestJsonLeaderboard(year, board, token) {
-    let url = "leaderboard.json";
+    let url = `/query/${year}/${board}/?session=${token}`;
     const response = await fetch(url);
     const json = await response.json();
     console.log(json);

@@ -1,0 +1,10 @@
+[project]
+name = "aoc-macos8-leaderboard"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.115.5",
+    "httpx>=0.28.0",
+]
