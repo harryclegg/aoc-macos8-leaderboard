@@ -8,34 +8,27 @@
 }
 
 @font-face {
-    font-family: 'ChicagoFLF';
-    src: url('fonts/ChicagoFLF.ttf') format('truetype'); /* Safari, Android, iOS */
+    font-family: "ChicagoFLF";
+    src: url("fonts/ChicagoFLF.ttf") format("truetype"); /* Safari, Android, iOS */
 }
 
 :root {
-    --button-box-shadow:
-	inset -1px -1px 0px 0px #777,
-	inset -2px -2px 0px 0px #aaa,
-	inset 1px 1px 0px 0px #ddd,
-	inset 2px 2px 0px 0px #fff;
-    --button-hover-bezel:
-	0 0 0 1px #aaa,
-	0 0 0 2px #ddd,
-	0 0 0 3px #000;
+    --button-box-shadow: inset -1px -1px 0px 0px #777, inset -2px -2px 0px 0px #aaa,
+        inset 1px 1px 0px 0px #ddd, inset 2px 2px 0px 0px #fff;
+    --button-hover-bezel: 0 0 0 1px #aaa, 0 0 0 2px #ddd, 0 0 0 3px #000;
 }
 
 html,
 body {
     -moz-user-select: none;
     -webkit-user-select: none;
-    background-image: url("img/patterns/128.png");
-    background-repeat: repeat;
     margin: 0;
     height: 100%;
-    font-family: 'ChicagoFLF', 'Times New Roman', 'Georgia', serif;
+    font-family: "ChicagoFLF", "Times New Roman", "Georgia", serif;
     font-size: 12px;
     font-weight: normal;
     overflow: hidden;
+    background-color: #000;
 }
 button {
     font-family: inherit;
@@ -45,8 +38,55 @@ button {
 a {
     color: #000;
 }
-:focus {outline:none;}
-::-moz-focus-inner {border:0;}
+:focus {
+    outline: none;
+}
+::-moz-focus-inner {
+    border: 0;
+}
+
+.menubar {
+    margin-top: -12px;
+
+    background-color: #ddd;
+    border-bottom: 1px solid #111;
+    box-shadow: 1px 2px #111, inset 1px 1px 0px 0px #fff, inset -1px -1px 0px 0px #999;
+
+    border-radius: 1.1em 1.1em 0 0;
+    height: 2.2em;
+}
+
+.menubar li {
+    margin-top: 0.1em;
+    height: 2em;
+
+    display: inline-block;
+    padding: 3px 8px;
+}
+
+.menubar li.icon {
+    margin-left: -2em;
+    font-size: larger;
+}
+
+.menubar li.right {
+    margin-top: 0.2em;
+    float: right;
+}
+
+.menubar li.right-icon {
+    float: right;
+    margin-top: 0.25em;
+    margin-right: 1em;
+}
+
+
+.main {
+
+    background-image: url("img/patterns/128.png");
+    background-repeat: repeat;
+    height: 100%;
+}
 
 /* Window layout */
 .content {
@@ -54,24 +94,20 @@ a {
     z-index: 2;
     font-size: 12px;
     font-weight: normal;
-    width: 260px;
-    margin: 100px auto 0;
+    width: 700px;
+    margin: 0 auto 0;
+    top: 100px;
     border: 1px solid #111;
     background: #ccc;
-    box-shadow:
-	1px 2px #111,
-	inset 1px 1px 0px 0px #fff,
-	inset -1px -1px 0px 0px #999;
+    box-shadow: 1px 2px #111, inset 1px 1px 0px 0px #fff, inset -1px -1px 0px 0px #999;
 }
 .content .inner {
     margin: 2px 4px 4px 4px;
+    padding: 1em 2em;
     border: 1px solid #111;
     background-color: #ddd;
-    box-shadow:
-	-1px -1px 0px 0px #999,
-	1px 1px 0px 0px #fff,
-	inset 1px 1px 0px 0px #fff,
-	inset -1px -1px 0px 0px #999;
+    box-shadow: -1px -1px 0px 0px #999, 1px 1px 0px 0px #fff, inset 1px 1px 0px 0px #fff,
+        inset -1px -1px 0px 0px #999;
 }
 .title {
     width: 100%;
@@ -84,12 +120,13 @@ a {
 }
 .content .icon {
     text-align: center;
-    margin: 1em 0;
+    margin: 0.5em 0;
+    scale: 0.5;
 }
 .content ul {
     list-style-type: none;
-    margin: 2px 0 1.5em 0;
-    padding: 0 0 0 2em;
+    margin: 0.5px 0 0.5em 0;
+    padding: 0;
     font-size: 12px;
 }
 .footer {
@@ -103,23 +140,18 @@ a {
     top: 3px;
     padding: 1px;
     background-color: #222;
-    box-shadow:
-	inset -1px -1px 0px 0px #fff,
-	inset 1px 1px 0px 0px #888;
+    box-shadow: inset -1px -1px 0px 0px #fff, inset 1px 1px 0px 0px #888;
 }
 .close-box.control-box {
     left: 4px;
 }
 .control-box-inner {
-    display: block;        
+    display: block;
     height: 12px;
     width: 12px;
-    background-image:
-	linear-gradient(to bottom right, #999, #aaa, #bbb, #ccc, #ddd, #eee, #fff);
+    background-image: linear-gradient(to bottom right, #999, #aaa, #bbb, #ccc, #ddd, #eee, #fff);
     border: 1px solid #222;
-    box-shadow:
-	inset 1px 1px 0px 0px #ccc,
-	inset -1px -1px 0px 0px #888;
+    box-shadow: inset 1px 1px 0px 0px #ccc, inset -1px -1px 0px 0px #888;
     text-indent: -99999em;
 }
 .control-box-inner:active {
@@ -147,26 +179,21 @@ a {
     height: 22px;
     background-color: #dedede;
     display: inline-block;
-    margin-bottom: 7px;
-    margin-left: 14px;
+    margin-top: 1em;
+    margin-bottom: 3px;
+    margin-left: 0;
     border-radius: 3px;
     border: 1px solid #000;
     box-shadow: var(--button-box-shadow);
 }
 .content .command_button:hover {
-    box-shadow:
-	var(--button-box-shadow),
-        var(--button-hover-bezel);
+    box-shadow: var(--button-box-shadow), var(--button-hover-bezel);
 }
 .content .command_button:active {
     color: #fff;
     background-color: #666;
-    box-shadow:
-	var(--button-hover-bezel),
-	inset -1px -1px 0px 0px #888,
-	inset -2px -2px 0px 0px #777,
-	inset 1px 1px 0px 0px #444,
-	inset 2px 2px 0px 0px #555;
+    box-shadow: var(--button-hover-bezel), inset -1px -1px 0px 0px #888,
+        inset -2px -2px 0px 0px #777, inset 1px 1px 0px 0px #444, inset 2px 2px 0px 0px #555;
 }
 /* Hide only visually, but have it available for screenreaders & for SEO purposes. See h5bp.com/v */
 .visuallyhidden {
@@ -188,4 +215,69 @@ a {
 
 .clearfix:after {
     clear: both;
+}
+
+.update {
+    font-size: smaller;
+    color: #999;
+}
+
+.member .name {
+    padding-right: 10px;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.member .total {
+    text-align: right;
+    padding-left: 10px;
+    width: 5%;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.member .days {
+    text-align: left;
+    padding-left: 10px;
+    width: 33.3em;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.member .days span {
+    width: 1em;
+    height: 1em;
+    margin-left: 0.25em;
+    display: inline-block;
+}
+
+.member .days span.zero {
+    color: #ccc;
+}
+
+.member .days span.one {
+    color: rgb(125, 133, 140);
+}
+
+.member .days span.two {
+    color: #4949b8;
+}
+
+.input {
+    margin-bottom: 0.5em;
+}
+
+.input .label {
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: right;
+    width: 20%;
+}
+
+.input .control {
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: left;
+    width: 70%;
 }
